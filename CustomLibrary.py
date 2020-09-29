@@ -23,7 +23,7 @@ def indicator_str_parser(dataframe, parsed_column_str, list_of_strs):
                                                             for x in dataframe[parsed_column_str]]
         
         # Include new column in list to be fed into function
-        list_of_series.append(dataframe[parsed_column_str + '_' + genre + '_id'])
+        list_of_series.append(dataframe[parsed_column_str + '_' + string + '_id'])
         
     # Unpack list_of_series to be fed as arguments into zip function for unique tuples
     dataframe[parsed_column_str + '_tuple'] = list(zip(*list_of_series))
