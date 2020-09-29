@@ -1,4 +1,21 @@
+# Standard libraries to import
+def import_libs():
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    
+    
 
+# Setting standard style
+def set_style():
+    pass
+
+# Converting columns in a dataframe that have string dollar amounts to ints    
+def clean_dollars(dataframe, column_str):
+    dataframe[column_str] = dataframe[column_str].str.replace(',', '').str.replace('$', '').astype(int)
+    return dataframe
+
+# Parses out a column of strings into indicator variables
 def indicator_str_parser(dataframe, parsed_column_str, list_of_strs):
     
     # If column full of strings has no string to be parsed, set value to 'none'
