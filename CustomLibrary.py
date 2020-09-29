@@ -15,10 +15,10 @@ def indicator_str_parser(dataframe, parsed_column_str, list_of_strs):
     list_of_series = []
     
     # Loop over elements in list
-    for genre in list_of_strs:
+    for string in list_of_strs:
         
         # Make a new indicator column from the parsed column adn the element to be searched for
-        dataframe[parsed_column_str + '_' + genre + '_id'] = [1 if genre in x 
+        dataframe[parsed_column_str + '_' + string + '_id'] = [1 if string in x 
                                                             else 0 
                                                             for x in dataframe[parsed_column_str]]
         
@@ -26,7 +26,10 @@ def indicator_str_parser(dataframe, parsed_column_str, list_of_strs):
         list_of_series.append(dataframe[parsed_column_str + '_' + genre + '_id'])
         
     # Unpack list_of_series to be fed as arguments into zip function for unique tuples
-    dataframe['genre_tuple'] = list(zip(*list_of_series))
+    dataframe[parsed_column_str + '_tuple'] = list(zip(*list_of_series))
+    
+    # Indicate the number of parsed out strings
+    dataframe[parsed_column_str + '_num_of_parses'] = [sum(list(x)) for x in dataframe[parsed_column_str + '_tuple']]
     
     # return dataframe for quick view/analysis
     return dataframe
