@@ -85,7 +85,7 @@ def clean_Data(DataFrame):
     DataFrame['advertisement_budget'] = DataFrame['production_budget']
     
     # Create a total costs column by adding the advertisement budget and the production budget
-    df_budget_merge['total_costs'] = df_budget_merge['production_budget'] + df_budget_merge['advertisement_budget']
+    DataFrame['total_costs'] = DataFrame['production_budget'] + DataFrame['advertisement_budget']
     
     # Create a profit column by taking the difference between the 'worldwide_gross' and 'total_costs' column
     DataFrame['profit'] = DataFrame['worldwide_gross'] - DataFrame['total_costs']
@@ -97,7 +97,7 @@ def clean_Data(DataFrame):
     DataFrame['ROI'] = DataFrame['profit'] / DataFrame('total_costs') * 100
     
     # Seperate the different genres by using the indicator_str_parser function
-    indicator_str_parser(df_budget_merge, 
+    indicator_str_parser(DataFrame, 
                          'genres', 
                          ['Action', 'Adventure', 'Comedy', 'Drama', 'Family', 'Thriller', 'Documentary']
                         )
