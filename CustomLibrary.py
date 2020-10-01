@@ -1,17 +1,27 @@
-# Standard libraries to import
-def import_libs():
-    import pandas as pd
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-    import matplotlib.ticker as mtick
-    
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import matplotlib.ticker as mtick
+
+ # Loading in datasets
+df_title_basics = pd.read_csv('./data/zippedData/imdb.title.basics.csv')
+df_movie_budgets = pd.read_csv('./data/zippedData/tn.movie_budgets.csv')
+df_budget_merge = pd.read_csv('Cleaned_Data.csv')
+
 
 # Setting standard style
 def set_style():
     pass
 
-# Converting columns in a dataframe that have string dollar amounts to ints    
+def df_info():
+    # Datatypes of both sets
+    print('imdb.title.basics.csv\n', df_title_basics.info(), '\n')
+    print('tn.movie_budgets.csv\n', df_movie_budgets.info())
+
+    
 def clean_dollars(dataframe, column_str):
+    # Converting columns in a dataframe that have string dollar amounts to ints 
     dataframe[column_str] = dataframe[column_str].str.replace(',', '').str.replace('$', '').astype(int)
     return dataframe
 
@@ -61,6 +71,7 @@ def prep_Data(DataFrame1, DataFrame2):
     
     # Third: merge the datasets on 'movie' and 'start_year'
     df_budget_merge = pd.merge(DataFrame2, df_title_movie, how ='inner', on = ('movie', 'start_year'))
+    return df_budget_merge
 
 def clean_Data(DataFrame):
     # Find any duplicates in the dataframe
@@ -85,7 +96,7 @@ def clean_Data(DataFrame):
     DataFrame['advertisement_budget'] = DataFrame['production_budget']
     
     # Create a total costs column by adding the advertisement budget and the production budget
-    df_budget_merge['total_costs'] = df_budget_merge['production_budget'] + df_budget_merge['advertisement_budget']
+    DataFrame['total_costs'] = DataFrame['production_budget'] + DataFrame['advertisement_budget']
     
     # Create a profit column by taking the difference between the 'worldwide_gross' and 'total_costs' column
     DataFrame['profit'] = DataFrame['worldwide_gross'] - DataFrame['total_costs']
@@ -97,10 +108,16 @@ def clean_Data(DataFrame):
     DataFrame['ROI'] = DataFrame['profit'] / DataFrame('total_costs') * 100
     
     # Seperate the different genres by using the indicator_str_parser function
-    indicator_str_parser(df_budget_merge, 
+    indicator_str_parser(DataFrame, 
                          'genres', 
                          ['Action', 'Adventure', 'Comedy', 'Drama', 'Family', 'Thriller', 'Documentary']
                         )
+    # Create a budget category for low, mid, and high budgets based on the total_costs column
+    DataFrame['budget_category'] = DataFrame['total_costs'].apply(lambda x: 
+                                                                  'low' if x < 25000000 
+                                                                  else 
+                                                                  ('mid' if x < 100000000 
+                                                                   else 'high' ))
     
 
 def Low_Budget_Genres(DataFrame):
