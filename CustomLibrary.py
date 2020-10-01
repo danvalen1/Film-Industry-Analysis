@@ -101,6 +101,12 @@ def clean_Data(DataFrame):
                          'genres', 
                          ['Action', 'Adventure', 'Comedy', 'Drama', 'Family', 'Thriller', 'Documentary']
                         )
+    # Create a budget category for low, mid, and high budgets based on the total_costs column
+    DataFrame['budget_category'] = DataFrame['total_costs'].apply(lambda x: 
+                                                                  'low' if x < 25000000 
+                                                                  else 
+                                                                  ('mid' if x < 100000000 
+                                                                   else 'high' ))
     
 
 def Low_Budget_Genres(DataFrame):
