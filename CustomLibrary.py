@@ -70,6 +70,7 @@ def prep_Data(DataFrame1, DataFrame2):
     
     # Third: merge the datasets on 'movie' and 'start_year'
     df_budget_merge = pd.merge(DataFrame2, df_title_movie, how ='inner', on = ('movie', 'start_year'))
+    return df_budget_merge
 
 def clean_Data(DataFrame):
     # Find any duplicates in the dataframe
