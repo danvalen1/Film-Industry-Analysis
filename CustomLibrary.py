@@ -105,19 +105,21 @@ def clean_Data(DataFrame):
     DataFrame.sort_values(by = ['profit'], axis = 0, ascending = False, inplace = True)
     
     # Create a Return on Investment (ROI) percentage column by dividing profit and total costs multiplied by 100
-    DataFrame['ROI'] = DataFrame['profit'] / DataFrame('total_costs') * 100
+    DataFrame['ROI'] = DataFrame['profit'] / DataFrame['total_costs'] * 100
     
     # Seperate the different genres by using the indicator_str_parser function
     indicator_str_parser(DataFrame, 
                          'genres', 
                          ['Action', 'Adventure', 'Comedy', 'Drama', 'Family', 'Thriller', 'Documentary']
                         )
+    
     # Create a budget category for low, mid, and high budgets based on the total_costs column
     DataFrame['budget_category'] = DataFrame['total_costs'].apply(lambda x: 
                                                                   'low' if x < 25000000 
                                                                   else 
                                                                   ('mid' if x < 100000000 
                                                                    else 'high' ))
+    return DataFrame
     
 
 def Low_Budget_Genres(DataFrame):
@@ -246,7 +248,7 @@ def budget_ROI_scatter(DataFrame):
     sns.set(font_scale = 3, style = 'whitegrid')
     
     #Create a scatterplot with Total Costs on the x-axis and ROI on the y-axis
-    sns.scatterplot(data = df, x = 'total_costs', y = 'ROI', ax = ax)
+    sns.scatterplot(data = DataFrame, x = 'total_costs', y = 'ROI', ax = ax)
     
     #Create axis limits on the y-axis to better frame the data
     plt.ylim(-200, 1500)
@@ -274,7 +276,7 @@ def LB_ROI_scatter(DataFrame):
     fig, ax = plt.subplots(figsize = (20, 12))
     
     #Create a scatterplot with for Low-Budget films with Total Costs on the x-axis and ROI on the y-axis
-    sns.scatterplot(data = df[df['budget_category'] == 'low'], 
+    sns.scatterplot(data = DataFrame[DataFrame['budget_category'] == 'low'], 
                     x = 'total_costs', 
                     y = 'ROI', 
                     ax = ax, 
@@ -306,7 +308,7 @@ def MB_ROI_scatter(DataFrame):
     fig, ax = plt.subplots(figsize = (20, 12))
     
     #Create a scatterplot with for Mid-Budget films with Total Costs on the x-axis and ROI on the y-axis
-    sns.scatterplot(data = df[df['budget_category'] == 'mid'], x = 'total_costs', y = 'ROI', ax = ax, color = 'steelblue')
+    sns.scatterplot(data = DataFrame[DataFrame['budget_category'] == 'mid'], x = 'total_costs', y = 'ROI', ax = ax, color = 'steelblue')
 
     #Create axis labels and a title
     plt.xlabel('Movie Budget')
@@ -331,7 +333,7 @@ def HB_ROI_scatter(DataFrame):
     fig, ax = plt.subplots(figsize = (20, 12))
     
     #Create a scatterplot with for High-Budget films with Total Costs on the x-axis and ROI on the y-axis
-    sns.scatterplot(data = df[df['budget_category'] == 'high'], x = 'total_costs', y = 'ROI', ax = ax, color = 'royalblue')
+    sns.scatterplot(data = DataFrame[DataFrame['budget_category'] == 'high'], x = 'total_costs', y = 'ROI', ax = ax, color = 'royalblue')
     
     #Create axis labels and a title and shift x-axis label down
     plt.xlabel('Movie Budget')
