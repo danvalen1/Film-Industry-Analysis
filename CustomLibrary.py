@@ -379,7 +379,7 @@ def ROI_budget_boxplot(DataFrame):
     return plt.show()
 
 
-def create_genre_dfs (DataFrame)
+def create_genre_dfs(DataFrame):
 
     action = DataFrame[DataFrame['genres_Action_id'] == 1]
     adventure = DataFrame[DataFrame['genres_Adventure_id'] == 1]
