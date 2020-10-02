@@ -400,7 +400,7 @@ def create_genre_dfs(DataFrame):
     family = DataFrame[DataFrame['genres_Family_id'] == 1]
     thriller = DataFrame[DataFrame['genres_Thriller_id'] == 1]
     documentary = DataFrame[DataFrame['genres_Documentary_id'] == 1]
-    other = DataFrame[DataFrame['genres_tuple'] == '(0, 0, 0, 0, 0, 0, 0)']
+    other = DataFrame[DataFrame['genres_tuple'] == (0, 0, 0, 0, 0, 0, 0)]
     drama = DataFrame[DataFrame['genres_Drama_id'] == 1]
     
     return [action, adventure, comedy, documentary, drama, family, thriller, other]
