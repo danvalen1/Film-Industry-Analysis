@@ -391,22 +391,24 @@ def create_genre_dfs(DataFrame):
     documentary = DataFrame[DataFrame['genres_Documentary_id'] == 1]
     other = DataFrame[DataFrame['genres_tuple'] == '(0, 0, 0, 0, 0, 0, 0)']
     drama = DataFrame[DataFrame['genres_Drama_id'] == 1]
+    
+    return [action, adventure, comedy, documentary, drama, family, thriller, other]
 
 
-def genre_boxplot(column):
+def genre_boxplot(lst, column):
 
     #Create a figure
     fig,  ax = plt.subplots(figsize = (20,12))
     
     #Create a boxplot for all genres for a specific column, in this case column is ROI. Do now show outliers, increase the line thickness for all parts of the boxplot, and set the colors for the lines. 
-    ax.boxplot([adventure[column], 
-                thriller[column], 
-                comedy[column], 
-                action[column], 
-                family[column], 
-                drama[column], 
-                documentary[column], 
-                other[column]], 
+    ax.boxplot([lst[1][column], 
+                lst[6][column], 
+                lst[2][column], 
+                lst[0][column], 
+                lst[5][column], 
+                lst[4][column], 
+                lst[3][column], 
+                lst[7][column]], 
                 showfliers = False, 
                 boxprops= dict(linewidth=2.0, color='blue'), 
                 whiskerprops=dict(linestyle='-',linewidth=2.0, color='black'), 
