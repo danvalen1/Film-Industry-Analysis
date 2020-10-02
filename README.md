@@ -89,7 +89,7 @@ This analysis of ROI across budget tiers and genres brings forward two recommend
 
 **Produce high budget adventure films-** if the studio has a high production & advertisement budget, it would make sense for the studio to invest in an adventure film since it had the highest median ROI for high budgets.
 
-**Produce low budget thrillers-** if the studio has a low budget, it would make sense for the studio in thrillers since they have the highest possible ROI of any genre film with low budgets. 
+**Produce low budget thrillers-** if the studio has a low budget, it would make sense for the studio to invest in thrillers since they have the highest possible ROI of any genre film with low budgets. 
 
 ## Next Steps
 
