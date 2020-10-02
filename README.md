@@ -1,6 +1,21 @@
 # Analysis of Film Industry ROIs
 **Authors**: Malcolm Katzenbach, Lauren Phipps, Dan Valenzuela
 
+## Repository Structure
+
+```
+├── README.md                           <- The top-level README for reviewers of this project
+├── Project_Walkthrough.ipynb           <- Narrative documentation of analysis in Jupyter notebook
+├── Film_Analysis_Presentation.pdf      <- PDF version of project presentation
+├── Cleaned_Data.csv                    <- CSV of data used for analysis
+├── CustomLibrary.py                    <- Module of function used in analysis
+├── data                                <- Sourced externally and generated from code
+├── images                              <- Both sourced externally and generated from code
+├── notebooks                           <- Noteboooks used to build Walkthrough
+└── templates                           <- Templates referenced in building project
+```
+
+
 ## Overview
 
 Microsoft wants to get into movie production. In order to help determine which types on movies they should create, this project analyzes the budgets and returns on investment for movies ranging from 2010-2019. Using data from the Internet Movie Database and The-Numbers.com, the movies were broken down into genre and budget categories to determine any trends in returns on investment. This information will be used to help Microsoft's new movie studio maximize their success by selecting genres and budget tiers that will yield the highest return on their investment. This project found that, if looking to invest in a low budget film, they should create thriller movies. If they are looking to invest in a high budget film, they should create adventure movies. These genres will maximize their return on investment at those budget tiers. 
