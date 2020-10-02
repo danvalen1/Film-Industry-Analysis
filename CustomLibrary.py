@@ -9,6 +9,12 @@ df_title_basics = pd.read_csv('./data/zippedData/imdb.title.basics.csv')
 df_movie_budgets = pd.read_csv('./data/zippedData/tn.movie_budgets.csv')
 df_budget_merge = pd.read_csv('Cleaned_Data.csv')
 
+# Figsizes, fontscales for image saving and notebook
+figsize_nb = (9, 4.5)
+figsize_save = (25,20)
+fontscale_nb = 1.5
+fontscale_save = 3
+
 
 # Setting standard style
 def set_style():
@@ -18,6 +24,9 @@ def df_info():
     # Datatypes of both sets
     print('imdb.title.basics.csv\n', df_title_basics.info(), '\n')
     print('tn.movie_budgets.csv\n', df_movie_budgets.info())
+    
+def df_time_counts(DF):
+    print(f'Rows: {DF.shape[0]}\n', f'Oldest movie: {DF.start_year.min()}\n', f'Newest movie: {DF.start_year.max()}')
 
     
 def clean_dollars(dataframe, column_str):
@@ -180,7 +189,7 @@ def High_Budget_Genres(DataFrame):
 def LB_Genres_Graph(DataFrame):
     
     # Create a figure
-    fig = plt.figure(figsize= (20, 16))
+    fig = plt.figure(figsize= figsize_nb)
     
     # Use sns.barplot with 'Genre' on the x axis and 'Median ROI' on the y axis. Give it a unique color
     ax = sns.barplot(data = DataFrame, x = 'Genre', y = 'Median ROI', color = 'lightblue')
@@ -199,7 +208,7 @@ def LB_Genres_Graph(DataFrame):
 
 def MB_Genres_Graph(DataFrame):
     # Create a figure
-    fig = plt.figure(figsize= (20, 16))
+    fig = plt.figure(figsize= figsize_nb)
     
     # Use sns.barplot with 'Genre' on the x axis and 'Median ROI' on the y axis. Give it a unique color
     ax = sns.barplot(data = DataFrame, x = 'Genre', y = 'Median ROI', color = 'steelblue')
@@ -219,13 +228,13 @@ def MB_Genres_Graph(DataFrame):
 def HB_Genres_Graph(DataFrame):
     
     # Create a figure
-    fig = plt.figure(figsize= (20, 16))
+    fig = plt.figure(figsize= figsize_nb)
     
     # Use sns.barplot with 'Genre' on the x axis and 'Median ROI' on the y axis. Give it a unique color
     ax = sns.barplot(data = DataFrame, x = 'Genre', y = 'Median ROI', color = 'blue')
     
     # Give the graph a title and lables
-    ax.set(title = 'Median ROI for High Budget Film by Genre', xlabel = 'Genres', ylabel = 'Return on Investment')
+    ax.set(title = 'Median ROI for High Budget Films by Genre', xlabel = 'Genres', ylabel = 'Return on Investment')
     
     # Change the xticks so that the tick labels are not on each other
     ax.set_xticklabels(ax.get_xticklabels(), rotation = 45, horizontalalignment = 'right')
@@ -240,12 +249,14 @@ def HB_Genres_Graph(DataFrame):
     
 
 def budget_ROI_scatter(DataFrame):
-
-    #Create a figure
-    fig, ax = plt.subplots(figsize = (25, 20))
+    #Create text and color settings for all plots after this one
+    sns.set(font_scale = fontscale_nb, style = 'whitegrid')
     
-    #Create text and color settings for all plots
-    sns.set(font_scale = 3, style = 'whitegrid')
+    #Create a figure
+    fig, ax = plt.subplots(figsize = figsize_nb)
+    
+    #Adjusting tick size
+    ax.tick_params(labelsize=14)
     
     #Create a scatterplot with Total Costs on the x-axis and ROI on the y-axis
     sns.scatterplot(data = DataFrame, x = 'total_costs', y = 'ROI', ax = ax)
@@ -273,7 +284,7 @@ def budget_ROI_scatter(DataFrame):
 def LB_ROI_scatter(DataFrame):
 
     #Create a figure
-    fig, ax = plt.subplots(figsize = (20, 12))
+    fig, ax = plt.subplots(figsize = figsize_nb)
     
     #Create a scatterplot with for Low-Budget films with Total Costs on the x-axis and ROI on the y-axis
     sns.scatterplot(data = DataFrame[DataFrame['budget_category'] == 'low'], 
@@ -305,7 +316,7 @@ def LB_ROI_scatter(DataFrame):
 def MB_ROI_scatter(DataFrame):
 
     #Create a figure
-    fig, ax = plt.subplots(figsize = (20, 12))
+    fig, ax = plt.subplots(figsize = figsize_nb)
     
     #Create a scatterplot with for Mid-Budget films with Total Costs on the x-axis and ROI on the y-axis
     sns.scatterplot(data = DataFrame[DataFrame['budget_category'] == 'mid'], x = 'total_costs', y = 'ROI', ax = ax, color = 'steelblue')
@@ -330,7 +341,7 @@ def MB_ROI_scatter(DataFrame):
 def HB_ROI_scatter(DataFrame):
     
     #Create a figure
-    fig, ax = plt.subplots(figsize = (20, 12))
+    fig, ax = plt.subplots(figsize = figsize_nb)
     
     #Create a scatterplot with for High-Budget films with Total Costs on the x-axis and ROI on the y-axis
     sns.scatterplot(data = DataFrame[DataFrame['budget_category'] == 'high'], x = 'total_costs', y = 'ROI', ax = ax, color = 'royalblue')
@@ -355,7 +366,7 @@ def HB_ROI_scatter(DataFrame):
 def ROI_budget_boxplot(DataFrame):
 
     #Create a figure
-    fig, ax = plt.subplots(figsize = (20,12))
+    fig, ax = plt.subplots(figsize = figsize_nb)
     
     #Create a boxplot for ROI distribution, grouped by budget category. Do now show outliers, increase the line thickness for all parts of the boxplot, and set the colors for the lines. Change the budget tier order to low, mid, and high. 
     DataFrame.boxplot(column = ['ROI'], by = ['budget_category'], ax=ax, showfliers = False, positions = [2, 0, 1],
@@ -398,7 +409,7 @@ def create_genre_dfs(DataFrame):
 def genre_boxplot(lst, column):
 
     #Create a figure
-    fig,  ax = plt.subplots(figsize = (20,12))
+    fig,  ax = plt.subplots(figsize = figsize_nb)
     
     #Create a boxplot for all genres for a specific column, in this case column is ROI. Do now show outliers, increase the line thickness for all parts of the boxplot, and set the colors for the lines. 
     ax.boxplot([lst[1][column], 
