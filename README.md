@@ -18,12 +18,12 @@
 
 ## Overview
 
-Microsoft wants to get into movie production. In order to help determine which types on movies they should create, this project analyzes the budgets and returns on investment for movies ranging from 2010-2019. Using data from the Internet Movie Database and The-Numbers.com, the movies were broken down into genre and budget categories to determine any trends in returns on investment. This information will be used to help Microsoft's new movie studio maximize their success by selecting genres and budget tiers that will yield the highest return on their investment. This project found that, if looking to invest in a low budget film, they should create thriller movies. If they are looking to invest in a high budget film, they should create adventure movies. These genres will maximize their return on investment at those budget tiers. 
+Microsoft wants to get into movie production. This project analyzes the budgets and returns on investment (ROI) for movies ranging from 2010-2019, in order to help determine which types of movies they should create. Using data from the Internet Movie Database and The-Numbers.com, the movies were broken down into genre and budget categories to determine any trends in returns on investment. This information will be used to help Microsoft's new movie studio maximize their success by selecting genres and budget tiers that will yield the highest return on their investment. This project found that, if looking to invest in a low budget film, they should create thriller movies. If they are looking to invest in a high budget film, they should create adventure movies. These genres will maximize their return on investment at those budget tiers. 
 
 
 ## Business Problem
 
-Many large companies have started to venture into creating original video content. Seeing the potential and wanting to be able to compete with other companies, Microsoft has created a new movie studio. In an effort to be as successful as possible, research must be done into the movie industry to determine what conditions will yield the highest return on investment (ROI). Microsoft's goal is to maximize their return on investment for the movies they create. 
+Many large companies have started to venture into creating original video content. Seeing the potential and wanting to be able to compete with other companies, Microsoft has created a new movie studio. In an effort to be as successful as possible, research must be done into the movie industry to determine what conditions will yield the highest return on investment. Microsoft's goal is to maximize their return on investment for the movies they create. 
 
 The business questions that will be addressed are:
 
@@ -39,7 +39,7 @@ Answering these questions will allow the project to provide specific recommendat
 
 
 ## Data Understanding
-For the purposes of this analysis we focused primarily on data from the Internet Movie Database (IMDB) and The-Numbers.com (TN), two sources that focus on the film industry. Specifically we used datasets that included--on one hand--title, date released, and genre data and--on the other hand--title, date released, production budgets, and box office figures. Below is a summary of the data pertinent to our analysis broken down by file. 
+For the purposes of this analysis, we focused primarily on data from the Internet Movie Database (IMDB) and The-Numbers.com (TN), two sources that specialize on the film industry. Specifically, we used two datasets that included--in one--title, date released, and genre data and--in the other--title, date released, production budgets, and box office figures. Below is a summary of the data pertinent to our analysis broken down by file. 
 
 | imdb.title.basics.csv | tn.movie_budgets.csv |
 | --- | --- |
@@ -51,7 +51,7 @@ For the purposes of this analysis we focused primarily on data from the Internet
 |  | worldwide_gross |
 
 ## Data Preparation
-In order to begin the analysis on the collected data, a few operations need to be performed. The most important operation being the addition of a `start_year` column to the TN data so that both the IMDB and TN datasets can be merged using the same data. By creating a new interger column by sliciing `release_date`, a merged dataset is possible to make based on movie title (`movie`) and `start_year`. 
+In order to begin the analysis on the collected data, a few operations need to be performed. The most important operation being the addition of a `start_year` column to the TN data so that both the IMDB and TN datasets can be more effectively merged. By creating a new integer column by slicing `release_date`, a merged dataset can be made based on movie title (`movie`) and `start_year`. Merging on both title and date prevents erroneous data arising from remakes or different movies with the same title. 
 
 After merging the data, key cleaning operations included removing duplicates, dropping any movies without `worldwide_gross` data,  calculating `ROI`, parsing out `genre` data, and converting revenue data into integers for analysis, and categorizing budgets.
 
@@ -60,7 +60,7 @@ After merging the data, key cleaning operations included removing duplicates, dr
 ### Distribution of ROI for Budget Tiers
 ![graph1](./images/budgettierboxplot.png)
 
-This graph shows that the median is highest for high budget films and that only a small percentage of those movies have a negative ROI and would lose money. They are the safest investment to get a postive ROI. Low budget films do have the highest portion of movies that will lose money, but at the same time, have the highest range of positive ROI's. The upper end of the box denotes the 75th percentile and that is at 200%, while the whiskers denoting the 90th percentile is significantly higher at over 600% return. This shows that there is potential to get a very high return on an investment in a low budget film.
+This graph shows that the median is highest for high budget films and that only a small percentage of those movies have a negative ROI and would lose money. They are the safest investment to get a positive ROI. Low budget films do have the highest portion of movies that will lose money, but at the same time, have the highest range of positive ROI's. The upper end of the box denotes the 75th percentile and that is at 200%, while the whiskers denoting the 90th percentile is significantly higher at over 600% return. This shows that there is potential to get a very high return on an investment in a low budget film.
 
 
 ### Median Returns on Investment for Low and High-Budget Films, Grouped by Genre
@@ -71,14 +71,14 @@ This graph shows that, for low budget films, most genres do not have a positive 
 
 ![graph3](./images/Median_ROI_for_High_Budget_Films_by_Genre.png)
 
-High budget films across all genres yielded a positive ROI, with adventure, comedy, and thriller films yielding the highest. This graph confirms that most films that have a budget of over $100 million will have a positve return on that investment.
+High budget films across all genres yielded a positive ROI, with adventure, comedy, and thriller films yielding the highest. This graph confirms that most films that have a budget of over $100 million will have a positive return on that investment.
 
 ## Evaluation
 
-The overall business problem that was given asked how a new movie studio may be as successful as possible in terms of ROI. By looking more deeply into the data on movies from the past 10 years, the analysis has shown what types of genres have done well with certain sized budgets. This has successfully answered the main question in a basic way. This analysis is helpful as done, however there are certain areas that could bring more accuracy to the analysis. 
+The overall business problem that was given asked how a new movie studio may be as successful as possible in terms of ROI. By looking more deeply into the data on movies from the past 10 years, the analysis has shown what types of genres have done well with certain sized budgets. This has successfully answered the main question in a basic way. This analysis is helpful as done, however, there are certain areas that could bring more accuracy to the analysis. 
 
-- **The Advertisement Cost**: In the analysis, it was assumed that advertisement budget was equal to the production budget. However, it unlikely that all movies had an equal advertisement and production budget. By using more accurates advertisement budgets, ithe accuracy of the ROI will increase.
-- **Time Period of Analysis**: The dataframes were only for movies from the last 10 years.     While useful for immediate future movies, having a longer period of data could increase how robust our analysis is.
+- **The Advertisement Cost**: In the analysis, it was assumed that advertisement budget was equal to the production budget. However, it unlikely that all movies had an equal advertisement and production budget. By using more accurate advertisement budgets, the accuracy of the ROI will increase.
+- **Time Period of Analysis**: The dataframes were only for movies from the last 10 years. While useful for immediate future movies, having a longer period of data could increase how robust our analysis is and could allow us to see trends over time.
 - **Inflation**: This analysis did not account for inflation. While only over a 10 year period, the inflation would have an effect on the money values of older movies, which would increase the accuracy of the comparison between  movies.
 - **Box Office Only**: This data only takes into account box office revenues. If Microsoft desired to go into streaming services and produce movies for the streaming service only, it would be more accurate to include data on streamed movies.
     
