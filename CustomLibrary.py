@@ -237,7 +237,7 @@ def HB_Genres_Graph(DataFrame):
     
     
 
-def budget_ROI_scatter (DataFrame):
+def budget_ROI_scatter(DataFrame):
 
     #Create a figure
     fig, ax = plt.subplots(figsize = (25, 20))
@@ -300,7 +300,7 @@ def LB_ROI_scatter(DataFrame):
 
 
 
-def MB_ROI_scatter (DataFrame):
+def MB_ROI_scatter(DataFrame):
 
     #Create a figure
     fig, ax = plt.subplots(figsize = (20, 12))
@@ -325,7 +325,7 @@ def MB_ROI_scatter (DataFrame):
 
 
 
-def HB_ROI_scatter (DataFrame):
+def HB_ROI_scatter(DataFrame):
     
     #Create a figure
     fig, ax = plt.subplots(figsize = (20, 12))
@@ -379,7 +379,7 @@ def ROI_budget_boxplot(DataFrame):
     return plt.show()
 
 
-def create_genre_dfs (DataFrame)
+def create_genre_dfs(DataFrame):
 
     action = DataFrame[DataFrame['genres_Action_id'] == 1]
     adventure = DataFrame[DataFrame['genres_Adventure_id'] == 1]
@@ -391,7 +391,7 @@ def create_genre_dfs (DataFrame)
     drama = DataFrame[DataFrame['genres_Drama_id'] == 1]
 
 
-def genre_boxplot (column):
+def genre_boxplot(column):
 
     #Create a figure
     fig,  ax = plt.subplots(figsize = (20,12))
